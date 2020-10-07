@@ -1,10 +1,15 @@
 import java.util.Objects;
 
 public abstract class Ball implements Comparable<Ball>{
+    private static long nextId;
+
     private int size;
     private String name;
+    private long id = 0;
+
 
     public Ball(int size, String name) {
+        this.id = Ball.getNextId();
         this.size = size;
         this.name = name;
     }
@@ -47,6 +52,23 @@ public abstract class Ball implements Comparable<Ball>{
         }
     }
 
+    public static long getNextId() {
+        nextId++;
+        return nextId;
+    }
+
+    public static void setNextId(long nextId) {
+        Ball.nextId = nextId;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public int getSize() {
         return size;
     }
@@ -70,17 +92,18 @@ public abstract class Ball implements Comparable<Ball>{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ball ball = (Ball) o;
-        return size == ball.size &&
-                Objects.equals(name, ball.name);
+        return id ==ball.id;
+        //return size == ball.size &&
+        //        Objects.equals(name, ball.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(size, name);
+        return Objects.hash(id,size, name);
     }
 
     @Override
     public String toString(){
-        return "Size="+ size + " Name=" + name + " " + getExtraInfo();
+        return "Id=#"+id+" Size="+ size + " Name=" + name + " " + getExtraInfo();
     }
 }

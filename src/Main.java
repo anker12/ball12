@@ -108,8 +108,37 @@ public class Main {
     }
 
     public static void main(String[] args){
-        ArrayList<Ball> balls = getBalls();
-        hashmap();
+
+        long start = System.nanoTime();
+
+
+        ArrayList<Ball> bolde = new ArrayList<Ball>();
+        Set<Ball> bset = new HashSet<>();
+
+        for(int i=0; i<1000000; i++){
+            bset.add( new FootBall(i,"fodbold"));
+            bset.add( new TennisBall(i,"tennisbold"));
+
+        }
+        long end = System.nanoTime();
+        long elapsed = (end-start)/1000000;
+
+        System.out.println("elapsed= "+elapsed + "ms");
+
+        System.out.println("set size= "+bset.size());
+        System.out.println();
+        FootBall fbXD = new FootBall(905558,"fodbold");
+        fbXD.setId(1811117);
+        long startsearch = System.nanoTime();
+        if (bset.contains(fbXD)){
+            System.out.println("("+fbXD + ") fundet!");
+        } else{
+            System.out.println("("+fbXD +") ikke fundet");
+        }
+        long endsearch = System.nanoTime();
+        long elapsedsearch = (endsearch-startsearch)/1000000;
+
+        System.out.println("elapsed= "+elapsedsearch + "ms");
 
     }
 }
